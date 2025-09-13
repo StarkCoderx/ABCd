@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Will You Be Mine?</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1: #1a1a2e;
+  --accent: #e94560;
+  --accent-2: #0f3460;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: 'Montserrat', sans-serif;
+  background:var(--bg1);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+}
+.hidden{display:none}
+.card{
+  background:rgba(255,255,255,0.05);
+  padding:32px;
+  border-radius:16px;
+  max-width:720px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  animation: fadeIn 1s ease;
+}
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:38px;
+  margin-bottom:20px;
+  color:var(--accent);
+}
+p{font-size:18px;line-height:1.6}
+.btn{
+  margin-top:20px;
+  padding:12px 24px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:16px
+}
+.primary{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#fff
+}
+.yes{background:var(--accent);color:#fff;margin-right:10px}
+.no{background:transparent;color:#fff;border:1px solid #fff}
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.9);}
+  to {opacity: 1; transform: scale(1);}
+}
+</style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div class="card" id="passwordGate">
+  <h1>🔒 Enter Password</h1>
+  <input type="password" id="passwordInput" placeholder="Enter secret" style="padding:10px;border-radius:8px;border:none;width:80%"><br>
+  <button class="btn primary" onclick="checkPassword()">Unlock</button>
+  <p style="margin-top:10px;font-size:14px;color:#ccc"> I wish You Will Like It 😉</p>
+</div>
+
+<!-- Page 1 -->
+<div class="card hidden" id="page1">
+  <h1>What I Feel For You ❤️</h1>
+  <p>
+    💖 The moment I saw you Palak I fell for you instantly altho many guys had fallen before but the way i fall for you is very deep 🌸💫
+    it felt like time stopped and the whole world disappeared 🌍❤️ 
+    all I could see was you 😍🌹 since that day every beat of my heart whispers your name 💓🎶
+    every thought circles back to you 🌙💭 you are not just the girl I love 🌺💕 you are the reason my soul feels alive 🌟
+    your smile is my favorite melody 🎶😊 your eyes hold a universe I want to get lost in 🌌💖 and your presence makes me feel like the luckiest person alive 🍀❤️ 
+    I don’t want just days with you 🕰️💞 I want lifetimes with you because one lifetime will never be enough to love you the way you deserve 💍💎 
+    you are my beginning my middle and my forever 💕🔥🌹✨
+  </p>
+  <button class="btn primary" onclick="goToPage2()">Click Here</button>
+</div>
+
+<!-- Page 2 (Video Page) -->
+<div class="card hidden" id="page2">
+    <h1>🎬 A Special Video For You 🎬</h1>
+    <div style="position:relative;width:100%;">
+      <video id="loveVideo" width="100%" controls>
+        <source src="assets/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <!-- Button appears on top of video -->
+      <button id="afterVideoBtn" class="btn primary hidden" 
+              onclick="goToPage3()"
+              style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+        Click Here
+      </button>
+    </div>
+  </div>
+
+<!-- Page 3 (Proposal Page) -->
+<div class="card hidden" id="page3">
+  <h1>Will You Be Mine Palak? 💍</h1>
+  <button class="btn yes" onclick="sayYes()">Yes 💖</button>
+  <button class="btn no" onclick="sayNo()">No</button>
+  <p id="responseMessage" style="margin-top:20px;font-size:18px;font-weight:600"></p>
+</div>
+
+
+<script>
+const passwordGate = document.getElementById('passwordGate');
+const page1 = document.getElementById('page1');
+const page2 = document.getElementById('page2');
+const page3 = document.getElementById('page3');
+const responseMessage = document.getElementById('responseMessage');
+const bgMusic = document.getElementById('bgMusic');
+const loveVideo = document.getElementById('loveVideo');
+const afterVideoBtn = document.getElementById('afterVideoBtn');
+
+function checkPassword() {
+  const val = document.getElementById('passwordInput').value;
+  if (val === 'Palak') { 
+    passwordGate.classList.add('hidden');
+    page1.classList.remove('hidden');
+    bgMusic.play().catch(() => {
+      console.log("Music playback blocked until user interacts further.");
+    });
+  } else {
+    alert("❌ Wrong password, try again!");
+  }
+}
+
+function goToPage2() {
+  page1.classList.add('hidden');
+  page2.classList.remove('hidden');
+}
+
+
+loveVideo.addEventListener('ended', () => {
+  afterVideoBtn.classList.remove('hidden');
+});
+
+function goToPage3() {
+  page2.classList.add('hidden');
+  page3.classList.remove('hidden');
+}
+
+function sayYes() {
+  responseMessage.textContent = " 😁 Aai Shappat Mala Khup Anand Zalay ";
+}
+
+function sayNo() {
+  responseMessage.textContent = "😢 Even if your answer is no my love for you will always remain same";
+}
+</script>
+</body>
+</html>
